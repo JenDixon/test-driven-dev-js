@@ -27,24 +27,24 @@ function Money(amt, currency) {
   this.amt = amt;
   this.currency = currency;
 }
-Money.prototype.getAmt = function() {
-  return (this.amt);
+Money.prototype.getAmt = function () {
+  return this.amt;
 };
-Money.prototype.getCurrency = function() {
-  return (this.currency);
+Money.prototype.getCurrency = function () {
+  return this.currency;
 };
-Money.prototype.times = function(multiplier) {
-  return this.amt *= multiplier;
+Money.prototype.times = function (multiplier) {
+  return new Money(this.amt *= multiplier, this.currency);
 };
-Money.prototype.plus = function(addend) {
-  return this.amt * addend.amt;
+Money.prototype.plus = function (addend) {
+  return new Money(this.amt + addend.amt, this.currency);
 };
-Money.prototype.equals = function(denomType) {
+Money.prototype.equals = function (denomType) {
   return this.amt === new denomType(this.amt);
 };
 
 //Define the dollar class
-function dollar(amt, currency) {
+function dollar(amt) {
   //Call the parent constructor
   //Money.call(this, amt);
   //this.currency = currency;
@@ -66,7 +66,7 @@ function dollar(amt, currency) {
 
 
 //Define the franc class
-function franc(amt, currency) {
+function franc(amt) {
   //Call the parent constructor
   //Money.call(this, amt);
   //this.currency = currency;
@@ -86,10 +86,10 @@ function franc(amt, currency) {
 //};
 
 
-var testMultiplication = function(multiplier) {
-  var five = dollar(5);
-  return five.times(multiplier);
-};
+//var testMultiplication = function(multiplier) {
+//  var five = dollar(5);
+//  return five.times(multiplier);
+//};
 
 var equalityTest = function(moneyDenom, moneyDenomAlt) {
   var moneyOne = moneyDenom;
@@ -97,9 +97,5 @@ var equalityTest = function(moneyDenom, moneyDenomAlt) {
   return moneyOne.amt === moneyTwo.amt;
 };
 
-//var testFrancMultiplication = function(multiplier) {
-//  var five = franc(5);
-//  return five.times(multiplier);
-//};
 
 

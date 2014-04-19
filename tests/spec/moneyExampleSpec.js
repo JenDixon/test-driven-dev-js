@@ -5,9 +5,8 @@
 
 describe("Test Multiplication", function () {
   it("should multiply an amount by a number and receive an amount", function () {
-    expect(testMultiplication(2)).toEqual(10);
+    expect(dollar(5).times(2)).toEqual(dollar(10));
   });
-
 });
 
 describe("Test Equality", function () {
@@ -16,15 +15,11 @@ describe("Test Equality", function () {
   });
 });
 
-//describe("Test Franc Multiplication", function () {
-//  it("should multiply an franc amount by a number and receive an amount", function () {
-//    expect(testFrancMultiplication(2)).toEqual(10);
-//  });
-//
-//  it("should multiply an franc amount by a number and receive an amount", function () {
-//    expect(testFrancMultiplication(3)).toEqual(15);
-//  });
-//});
+describe("Object Return", function () {
+  it("the amount of the new object should equal the amt of the original", function () {
+    expect(dollar(5)).toEqual(dollar(5).times(1));
+  });
+});
 
 describe("Test Currency", function () {
   it("test dollar currency", function () {
@@ -36,8 +31,8 @@ describe("Test Currency", function () {
   });
 });
 
-describe("Test Simple Addition", function () {
-  it("test simple addition", function () {
-    expect(testSimpleAddition(dollar(10), reduced)).toEqual(10);
+describe("Test Addition", function () {
+  it("should add an amount by a number and receive an amount", function () {
+    expect(dollar(5).plus(dollar(2))).toEqual(dollar(7));
   });
 });

@@ -26,13 +26,19 @@ describe("Test Currency", function () {
     expect(dollar(5).currency).toEqual('USD');
   });
 
-  it("test frank currency", function () {
+  it("Test frank currency", function () {
     expect(franc(5).currency).toEqual('CHF');
   });
 });
 
-describe("Test Addition", function () {
-  it("should add an amount by a number and receive an amount", function () {
-    expect(dollar(5).plus(dollar(2))).toEqual(dollar(7));
+//describe("Test Addition", function () {
+//  it("should add an amount by a number and receive an amount", function () {
+//    expect(dollar(5).plus(dollar(2))).toEqual(dollar(7));
+//  });
+//});
+
+describe("Test reduce sum", function() {
+  it("sum of the amounts of two moneys, and the currency being reduced to", function() {
+    expect(testReduceSum()).toEqual(dollar(7));
   });
 });

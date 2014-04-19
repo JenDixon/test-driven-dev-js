@@ -37,7 +37,7 @@ Money.prototype.times = function (multiplier) {
   return new Money(this.amt *= multiplier, this.currency);
 };
 Money.prototype.plus = function (addend) {
-  return new Money(this.amt + addend.amt, this.currency);
+  return new Sum(this, addend);
 };
 Money.prototype.equals = function (denomType) {
   return this.amt === new denomType(this.amt);
@@ -45,57 +45,41 @@ Money.prototype.equals = function (denomType) {
 
 //Define the dollar class
 function dollar(amt) {
-  //Call the parent constructor
-  //Money.call(this, amt);
-  //this.currency = currency;
   return new Money(amt, 'USD');
 }
 
-//Extend the money class
-//Dollar.prototype = Object.create(Money.prototype);
-
-//ALT METHOD
-//Dollar.prototype = new Money();
-//Dollar.prototype.constructor = Dollar;
-
-//dollar factory
-//var dollarFactory = function(amt) {
-  //return new Dollar(amt, 'USD');
-  //return dollar(amt, 'USD');
-//};
-
-
 //Define the franc class
 function franc(amt) {
-  //Call the parent constructor
-  //Money.call(this, amt);
-  //this.currency = currency;
   return new Money(amt, 'CHF');
 }
 
-//Extend the Money class
-//Franc.prototype = Object.create(Money.prototype);
 
-//ALT METHOD
-//Franc.prototype = new Money();
-//Franc.prototype.constructor = Franc;
+function Bank() {}
 
-//franc factory
-//var francFactory = function(amt) {
-//  return franc(amt, 'CHF');
-//};
-
-
-//var testMultiplication = function(multiplier) {
-//  var five = dollar(5);
-//  return five.times(multiplier);
-//};
-
-var equalityTest = function(moneyDenom, moneyDenomAlt) {
-  var moneyOne = moneyDenom;
-  var moneyTwo = moneyDenomAlt;
-  return moneyOne.amt === moneyTwo.amt;
+Bank.prototype.reduce = function (source, to) {
+  var sum = source;
+  var amount = sum.augend.amt + sum.addend.amt;
+  return new Money(amount, to);
 };
 
 
+function Sum(augend, addend) {
+  this.augend = augend;
+  this.addend = addend;
+}
 
+Sum.prototype.sum = function (augend, addend) {
+  return new Sum (this.augend, this.addend);
+};
+
+var equalityTest = function (moneyDenom, moneyDenomAlt) {
+  var moneyOne = moneyDenom, moneyTwo = moneyDenomAlt;
+  return moneyOne.amt === moneyTwo.amt;
+};
+
+var testReduceSum = function () {
+  var sum = new Sum(dollar(3), dollar(4));
+  var bank = new Bank();
+  var result = bank.reduce(sum, 'USD');
+  return result;
+};
